@@ -48,21 +48,21 @@ heartBtns.forEach(heartBtn => {
 function updateTotalPrice() {
   let totalSum = 0;
   
-  unitPrices.forEach((unitPrice, index) => {
-    // Get the quantity value
-    let qty = parseInt(quantities[index].textContent, 10);
+  let currentCards = document.querySelectorAll(".card-body .card");
+
+  currentCards.forEach((card) => {
+    let quantityElement = card.querySelector(".quantity");
+    let unitPriceElement = card.querySelector(".unit-price");
     
-    // Extract the price number (remove the "$")
-    let price = parseFloat(unitPrice.textContent.replace('$', ''));
-    
-    // Calculate subtotal for this item
-    let itemTotal = qty * price;
-    
-    // Add to the running total
-    totalSum += itemTotal;
+    if (quantityElement && unitPriceElement) {
+      let qty = parseInt(quantityElement.textContent, 10);
+      let price = parseFloat(unitPriceElement.textContent.replace('$', ''));
+      
+      totalSum += qty * price;
+    }
   });
   
-  // Update the total display with the sum
+ 
   total.textContent = totalSum + ' $';
 }
 
